@@ -68,7 +68,7 @@ export const createUserOrder = inngest.createFunction(
     {
         id:'create-user-order',
         batchEvents:{
-            maxSize: 25,
+            maxSize: 5,
             timeout: '5s'
         }
     },
@@ -79,7 +79,7 @@ export const createUserOrder = inngest.createFunction(
                 userId: event.data.userId,
                 items: event.data.items,
                 amount: event.data.amount,
-                address: event.data.date
+                address: event.data.address
             }
         })
 
