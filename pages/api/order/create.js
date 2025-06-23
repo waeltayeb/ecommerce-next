@@ -11,7 +11,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { userId } = getAuth();
+    const { userId } = getAuth(req);
     const {address, items } = req.body;
     if (!address || items.length === 0){
               return res.status(400).json({ success: false, message: "invalide data" });
@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
     const amount = await items.reduce(async(acc, item) => {
         const product = await Product.findById(item.product);
-        return acc + product.offerPrice * item.quantity;
+        return await acc + product.offerPrice * item.quantity;
     },0)
 
     await inngest.send({
